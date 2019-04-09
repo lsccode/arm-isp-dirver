@@ -221,7 +221,8 @@ void acamera_load_binary_sequence( acamera_sbus_ptr_t p_sbus, uintptr_t isp_offs
 }
 
 
-void acamera_load_array_sequence( acamera_sbus_ptr_t p_sbus, uintptr_t isp_offset, char size, const acam_reg_t **sequence, int group )
+void acamera_load_array_sequence( acamera_sbus_ptr_t p_sbus, uintptr_t isp_offset,
+                                  char size, const acam_reg_t **sequence, int group )
 {
     const acam_reg_t *seq = sequence[group];
     uint32_t end_seq = 0;

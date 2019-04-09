@@ -139,7 +139,8 @@ static int32_t validate_settings( acamera_settings *settings, uint32_t ctx_num )
 
 #define ACAMERA_CONTEXT_SIZE ACAMERA_ISP1_BASE_ADDR + ACAMERA_ISP1_SIZE
 
-static int32_t dma_channel_addresses_setup( void *isp_chan, void *metering_chan, void *sw_context_map, uint32_t idx, uint32_t hw_isp_addr )
+static int32_t dma_channel_addresses_setup( void *isp_chan, void *metering_chan,
+        void *sw_context_map, uint32_t idx, uint32_t hw_isp_addr )
 {
     int32_t result = 0;
     //PING ISP
@@ -314,7 +315,8 @@ int32_t acamera_init( acamera_settings *settings, uint32_t ctx_num )
                 result = system_dma_init( &g_firmware.dma_chan_isp_config );
                 result |= system_dma_init( &g_firmware.dma_chan_isp_metering );
                 if ( result == 0 ) {
-                    LOG( LOG_INFO, "DMA Channels allocated 0x%x and 0x%x", g_firmware.dma_chan_isp_config, g_firmware.dma_chan_isp_metering );
+                    LOG( LOG_INFO, "DMA Channels allocated 0x%x and 0x%x", g_firmware.dma_chan_isp_config,
+                         g_firmware.dma_chan_isp_metering );
                     // allocate memory for dma transfers
                     for ( idx = 0; idx < ctx_num; idx++ ) {
                         acamera_context_t *p_ctx = (acamera_context_ptr_t)&g_firmware.fw_ctx[idx];
@@ -328,7 +330,10 @@ int32_t acamera_init( acamera_settings *settings, uint32_t ctx_num )
                         p_ctx->sw_reg_map.isp_sw_config_map = system_sw_alloc( ACAMERA_CONTEXT_SIZE );
 
                         if ( p_ctx->sw_reg_map.isp_sw_config_map ) {
-                            result = dma_channel_addresses_setup( g_firmware.dma_chan_isp_config, g_firmware.dma_chan_isp_metering, (void *)p_ctx->sw_reg_map.isp_sw_config_map, idx, settings->hw_isp_addr );
+                            result = dma_channel_addresses_setup( g_firmware.dma_chan_isp_config,
+                                                                  g_firmware.dma_chan_isp_metering,
+                                                                  (void *)p_ctx->sw_reg_map.isp_sw_config_map,
+                                                                  idx, settings->hw_isp_addr );
                         } else {
                             LOG( LOG_CRIT, "Software Context %d failed to allocate", idx );
                             result = -1;

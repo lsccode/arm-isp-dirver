@@ -33,7 +33,7 @@ static acam_reg_t linear[] = {
 };
 
 
-static acam_reg_t settings[] = {
+static acam_reg_t settings_reg[] = {
     { 0x80, 0x2L, 0x19fdf0f,4 },
     { 0x84, 0x1000700L, 0xf0f1f03,4 },
     { 0x88, 0xffffL, 0x0,4 },
@@ -832,7 +832,7 @@ static acam_reg_t fpga_linear[] = {
 
 static const acam_reg_t *seq_table[] = {
     linear,
-    settings,
+    settings_reg,
     fpga_fs_lin,
     fs_lin_2exp,
     fs_lin_3exp,
